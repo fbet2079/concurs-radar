@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101c35">
+<meta name="description" content="Descoperă concursuri și premii din România.">
+<title>Concurs Radar | Descoperă premii</title>
+<style>
+:root{--navy:#101c35;--yellow:#f5c451;--bg:#f4f6fa;--muted:#64748b}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--navy);line-height:1.6}
+.container{width:min(1080px,92%);margin:auto}
+header,.hero,footer{background:var(--navy);color:white}
+header{padding:18px 0}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:bold}
+.logo{background:var(--yellow);color:var(--navy);padding:7px 12px;border-radius:12px;font-size:25px}
+.nav a{color:white;text-decoration:none}
+.hero{padding:52px 0 46px}
+.eyebrow{color:var(--yellow);font-weight:bold;text-transform:uppercase;letter-spacing:2px;font-size:12px}
+h1{font-size:clamp(34px,6vw,60px);line-height:1.1;margin:16px 0}
+.accent{color:var(--yellow)}
+.hero p{color:#d2dcec;max-width:560px}
+.search{display:flex;gap:8px;background:white;padding:7px;border-radius:12px;max-width:620px;margin-top:25px}
+input{border:0;outline:none;padding:12px;min-width:0;flex:1;font-size:16px}
+button,.button{border:0;border-radius:9px;background:var(--yellow);color:var(--navy);padding:12px 16px;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block}
+main{padding:32px 0 55px}
+h2{margin:0;font-size:25px}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.muted{color:var(--muted);font-size:13px}
+.categories{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 25px}
+.chip{background:white;border:1px solid #e1e6ef;border-radius:30px;padding:9px 14px;cursor:pointer}
+.chip.active{background:var(--navy);color:white}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.card{background:white;border:1px solid #e4e9f1;border-radius:15px;overflow:hidden;display:flex;flex-direction:column}
+.art{height:150px;display:grid;place-items:center;font-size:65px}
+.card-body{padding:18px;display:flex;flex-direction:column;align-items:flex-start;flex:1}
+.tag{font-size:11px;letter-spacing:1px;font-weight:bold;color:#64748b;text-transform:uppercase}
+h3{margin:8px 0;font-size:19px;line-height:1.35}
+.card-body p{color:var(--muted);font-size:14px;margin:4px 0 15px}
+.notice{background:#fff4d5;color:#74561b;padding:14px;border-radius:10px;margin-top:22px;font-size:13px}
+.empty{grid-column:1/-1;padding:30px;text-align:center}
+footer{padding:25px 0;color:#d2dcec;font-size:14px}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding:38px 0}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}.search{flex-direction:column}.search button{width:100%}.art{height:120px}.nav a{font-size:13px}}
+</style>
+</head>
+<body>
+<header><div class="container nav">
+<div class="brand"><span class="logo">⌖</span> Concurs Radar</div>
+<a href="#concursuri">Vezi concursurile ↓</a>
+</div></header>
+<section class="hero"><div class="container">
+<div class="eyebrow">Radarul tău de premii</div>
+<h1>Descoperă următorul tău <span class="accent">premiu.</span></h1>
+<p>Concursuri din România, adunate într-un singur loc. Descoperă oportunități și participă direct la organizator.</p>
+<form class="search" id="searchForm">
+<input id="search" type="search" placeholder="Caută concursuri, premii..." aria-label="Caută concursuri">
+<button type="submit">Caută →</button>
+</form>
+</div></section>
+<main class="container" id="concursuri">
+<div class="section-head"><h2>Concursuri de descoperit</h2><span class="muted" id="count"></span></div>
+<div class="categories" id="categories">
+<button class="chip active" data-category="Toate">Toate</button>
+<button class="chip" data-category="Gadgeturi">Gadgeturi</button>
+<button class="chip" data-category="Vouchere">Vouchere</button>
+<button class="chip" data-category="Vacanțe">Vacanțe</button>
+<button class="chip" data-category="Produse">Produse</button>
+</div>
+<div class="grid" id="grid"></div>
+<div class="notice">Acestea sunt exemple demonstrative, nu concursuri active verificate.</div>
+</main>
+<footer><div class="container">
+<strong>Concurs Radar</strong>
+<p>Descoperă. Participă. Câștigă.</p>
+<p>Platformă independentă. Verifică întotdeauna regulamentul organizatorului.</p>
+<p>Contact: adaugă adresa ta de e-mail înainte de lansare.</p>
+<p>© <span id="year"></span> Concurs Radar</p>
+</div></footer>
+<script>
+const contests=[
+{title:"Câștigă un smartphone",category:"Gadgeturi",prize:"Telefon",icon:"📱",color:"#e8edff"},
+{title:"Voucher pentru cumpărături",category:"Vouchere",prize:"Voucher cadou",icon:"🎁",color:"#fff0d8"},
+{title:"O escapadă de weekend",category:"Vacanțe",prize:"Experiență",icon:"🏝️",color:"#ddf5e7"},
+{title:"Surprize pentru casa ta",category:"Produse",prize:"Produse",icon:"🏡",color:"#f6e3f4"}
+];
+let category="Toate";
+const search=document.getElementById("search");
+const grid=document.getElementById("grid");
+function render(){
+const term=search.value.trim().toLocaleLowerCase("ro");
+const filtered=contests.filter(c=>(category==="Toate"||c.category===category)&&(c.title+" "+c.category+" "+c.prize).toLocaleLowerCase("ro").includes(term));
+document.getElementById("count").textContent=filtered.length+" rezultate";
+grid.replaceChildren();
+if(!filtered.length){const p=document.createElement("p");p.className="empty";p.textContent="Nu am găsit rezultate. Încearcă altă căutare.";grid.append(p);return;}
+filtered.forEach(c=>{
+const card=document.createElement("article");card.className="card";
+const art=document.createElement("div");art.className="art";art.style.background=c.color;art.textContent=c.icon;
+const body=document.createElement("div");body.className="card-body";
+const tag=document.createElement("span");tag.className="tag";tag.textContent=c.category;
+const title=document.createElement("h3");title.textContent=c.title;
+const prize=document.createElement("p");prize.textContent="Premiu: "+c.prize;
+const note=document.createElement("p");note.textContent="Exemplu demonstrativ";
+body.append(tag,title,prize,note);card.append(art,body);grid.append(card);
+});
+}
+document.getElementById("categories").addEventListener("click",e=>{
+const b=e.target.closest("button[data-category]");if(!b)return;
+category=b.dataset.category;
+document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x===b));render();
+});
+document.getElementById("searchForm").addEventListener("submit",e=>{e.preventDefault();render();document.getElementById("concursuri").scrollIntoView({behavior:"smooth"});});
+search.addEventListener("input",render);
+document.getElementById("year").textContent=new Date().getFullYear();
+render();
+</script>
+</body>
+</html>
